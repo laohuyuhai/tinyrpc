@@ -45,11 +45,13 @@ func (r *RequestHeader) Marshal() []byte {
 	// MaxHeaderSize = 2 + 10 + len(string) + 10 + 10 + 4
 	header := make([]byte, MaxHeaderSize+len(r.Method))
 
+	// todo 这里没有看懂，为什么要用小端存储？
 	binary.LittleEndian.PutUint16(header[idx:], uint16(r.CompressType))
 	idx += Uint16Size
 
 	idx += writeString(header[idx:], r.Method)
 	idx += binary.PutUvarint(header[idx:], r.ID)
+	// todo 为啥这里要转为64位，用32位的小端不行吗？
 	idx += binary.PutUvarint(header[idx:], uint64(r.RequestLen))
 
 	binary.LittleEndian.PutUint32(header[idx:], r.Checksum)
