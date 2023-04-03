@@ -21,6 +21,7 @@ type Server struct {
 
 // NewServer Create a new rpc server
 func NewServer(opts ...Option) *Server {
+	// 这里相当于给serializer一个默认值
 	options := options{
 		serializer: serializer.Proto,
 	}

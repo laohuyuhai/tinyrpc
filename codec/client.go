@@ -83,6 +83,7 @@ func (c *clientCodec) WriteRequest(r *rpc.Request, param interface{}) error {
 
 // ReadResponseHeader read the rpc response header from the io stream
 func (c *clientCodec) ReadResponseHeader(r *rpc.Response) error {
+	// todo response不需要初始化吗？
 	c.response.ResetHeader()
 	data, err := recvFrame(c.r)
 	if err != nil {

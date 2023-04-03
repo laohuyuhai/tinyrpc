@@ -201,6 +201,7 @@ func readString(data []byte) (string, int) {
 	return str, idx
 }
 
+// 这里先写字符串的长度，再写字符串内容
 func writeString(data []byte, str string) int {
 	idx := 0
 	idx += binary.PutUvarint(data, uint64(len(str)))
